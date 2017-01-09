@@ -1,3 +1,14 @@
 <h1>
   {{title}}
 </h1>
+
+<app-items-list
+  [items]="items | async"
+  (selected)="selectItem($event)"
+  (deleted)="deleteItem($event)"
+></app-items-list>
+<app-item-details
+  [item]="selectedItem | async"
+  (saved)="saveItem($event)"
+  (cancelled)="resetItem($event)"
+></app-item-details>

@@ -1,0 +1,36 @@
+<p>
+  item-details works!
+</p>
+<div>
+  <h2 *ngIf="selectedItem.id">
+    Editing {{item.id}}
+  </h2>
+
+  <h2 *ngIf="!selectedItem.id">
+    Create New Item
+  </h2>
+</div>
+<form novalidate>
+  <div>
+    <label for="item-name">Item Name</label>
+    <input
+      id="item-name"
+      type="text"
+      placeholder="Enter a name"
+      [(ngModel)]="selectedItem.name"
+      name="name">
+  </div>
+  <div>
+    <label for="item-description">Item Description</label>
+    <input
+      id="item-description"
+      type="text"
+      placeholder="Enter a description"
+      [(ngModel)]="selectedItem.name"
+      name="description">
+  </div>
+  <div>
+    <button type="button" (click)="cancelled.emit(selectedItem)">Cancel</button>
+    <button type="submit" (click)="saved.emit(selectedItem)">Save</button>
+  </div>
+</form>

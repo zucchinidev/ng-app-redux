@@ -42,7 +42,7 @@
   },
   "defaults": {
     "styleExt": "css",
-    "prefixInterfaces": false,
+    "prefixInterfaces": true,
     "inline": {
       "style": false,
       "template": false

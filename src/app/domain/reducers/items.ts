@@ -3,8 +3,7 @@ export const CREATE_ITEM: string = 'CREATE_ITEM';
 export const UPDATE_ITEM: string = 'UPDATE_ITEM';
 export const DELETE_ITEM: string = 'DELETE_ITEM';
 
-
-export const itemsReducer = (state: any = [], {type, payload}) => {
+export function itemsReducer(state: any = [], {type, payload}) {
   switch (type) {
     case ADD_ITEMS:
       return payload;
@@ -19,4 +18,4 @@ export const itemsReducer = (state: any = [], {type, payload}) => {
     default:
       return state;
   }
-};
+}

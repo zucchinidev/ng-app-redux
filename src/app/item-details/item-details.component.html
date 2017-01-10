@@ -26,11 +26,11 @@
       id="item-description"
       type="text"
       placeholder="Enter a description"
-      [(ngModel)]="selectedItem.name"
+      [(ngModel)]="selectedItem.description"
       name="description">
   </div>
   <div>
     <button type="button" (click)="cancelled.emit(selectedItem)">Cancel</button>
-    <button type="submit" (click)="saved.emit(selectedItem)">Save</button>
+    <button type="submit" (click)="saved.emit(selectedItem); $event.preventDefault();">Save</button>
   </div>
 </form>

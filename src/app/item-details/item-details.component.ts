@@ -8,7 +8,6 @@ import { Item } from '../domain/models/item.interface';
 })
 export class ItemDetailsComponent implements OnInit {
   private _item: Item;
-  originalName: string;
   selectedItem: Item;
   @Output() saved: EventEmitter<Item> = new EventEmitter<Item>();
   @Output() cancelled: EventEmitter<Item> = new EventEmitter<Item>();

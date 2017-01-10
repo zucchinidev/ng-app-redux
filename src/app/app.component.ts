@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Item, AppStore } from './domain/models/index';
 import { ItemsService } from './domain/services/items.service';
@@ -8,7 +8,8 @@ import { SELECT_ITEM } from './domain/reducers/selectedItem';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   title = 'Angular 2 && Redux!';
@@ -18,8 +19,9 @@ export class AppComponent {
   constructor(private itemsService: ItemsService, private store: Store<AppStore>) {
     this.items = this.itemsService.items;
     this.selectedItem = this.store.select('selectedItem');
-    this.selectedItem.subscribe(console.log.bind(this));
+    this.selectedItem.subscribe(v => console.log(v));
     this.itemsService.loadItems();
+    this.items.subscribe(v => console.log(v));
   }
 
   selectItem(item: Item) {
@@ -34,7 +36,6 @@ export class AppComponent {
   }
 
   saveItem(item: Item) {
-
     this.itemsService.saveItem(item);
     this.resetItem();
   }

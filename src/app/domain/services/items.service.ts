@@ -10,8 +10,10 @@ import { StringService } from './string.service';
 export class ItemsService {
   items: Observable<Array<Item>>;
 
-  constructor(private store: Store<AppStore>,
-              private stringService: StringService) {
+  constructor(
+    private store: Store<AppStore>,
+    private stringService: StringService
+  ) {
     this.items = this.store.select('items');
   }
 

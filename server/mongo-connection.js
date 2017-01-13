@@ -1,9 +1,8 @@
-// ./mongod --dbpath ../data
 const mongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
-const url = 'mongodb://127.0.0.1:27017/money';
+const url = 'mongodb://127.0.0.1:27017/appstore';
 
-const connecting = (collectionName) => {
+const connecting = () => {
   let executor = (resolve, reject) => {
     mongoClient.connect(url, (err, db) => err ? reject(err) : resolve(db));
   };
@@ -13,24 +12,18 @@ const connecting = (collectionName) => {
 
 const colConnecting = (collectionName) => {
   return new Promise((resolve, reject) => {
-    console.log(url);
     mongoClient.connect(url, (err, db) => err ? reject(err) : resolve(db.collection(collectionName)));
   });
 };
 
 const finding = (collectionName, query, id) => {
-  console.log(collectionName, query, id);
   return new Promise((resolve, reject) => {
     if (id) {
       query._id = new ObjectID(id);
     }
     colConnecting(collectionName)
       .then(collectionDb => {
-        collectionDb
-          .find(query)
-          .toArray((err, result) => {
-            return err ? reject(err) : resolve(result)
-          });
+        collectionDb.find(query).toArray((err, result) => err ? reject(err) : resolve(result));
       })
       .catch(err => reject(err));
   });
@@ -83,9 +76,7 @@ const aggregating = (collectionName, query) => {
 module.exports = {
   connecting: connecting,
   colConnecting: colConnecting,
-  conConnectingXtrem: colName => new Promise((resolve, reject) => connect(url, (err, db) => err ? reject(err) : resolve(collectionName))),
   finding: finding,
-  findingXtrem: {},
   inserting: inserting,
   updating: updating,
   deleting: deleting,
